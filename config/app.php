@@ -1,6 +1,31 @@
 <?php
+use App\Http\Middleware\CheckUserRole;
+
 
 return [
+
+
+
+
+  /*
+    |--------------------------------------------------------------------------
+    | Middleware
+    |--------------------------------------------------------------------------
+    |
+    | Register the middleware for your application. Middleware can be
+    | applied globally or to specific routes or groups.
+    |
+    */
+
+    'middleware' => [
+        'api' => [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            
+        ],
+        
+    ],
 
     /*
     |--------------------------------------------------------------------------

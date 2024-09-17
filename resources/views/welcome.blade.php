@@ -12,6 +12,7 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <h2>welcome</h2>
+        <a href="{{ route('login') }}">login</a>
 
 
     </body>
