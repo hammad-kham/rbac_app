@@ -10,7 +10,7 @@
     <div class="container">
         <h1>user Dashboard</h1>
         <p>Welcome, user!</p>
-        <a href="{{ route('register') }}">Logout</a>
+        <a href="{{ route('login') }}">Logout</a>
     </div>
 </body>
 </html>

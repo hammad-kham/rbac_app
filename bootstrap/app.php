@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Middleware\CheckUserRole;
 use Illuminate\Foundation\Application;
+use Spatie\Permission\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,9 +16,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-            // $middleware->alias([
-            //     'role' => CheckUserRole::class,
-            // ]);
+        $middleware->alias([
+            'role' => RoleMiddleware::class,
+
+            'permission' => PermissionMiddleware::class,
+
+            
+            'role_or_permission' => RoleOrPermissionMiddleware::class,
+            //auth:sanctum middleware
+            // 'auth:sanctum' => EnsureFrontendRequestsAreStateful::class,
+
+        ]);
 
             
     })

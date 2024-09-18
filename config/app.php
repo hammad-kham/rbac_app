@@ -1,5 +1,8 @@
 <?php
+use App\Http\Middleware\Cors;
 use App\Http\Middleware\CheckUserRole;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 
 return [
@@ -19,12 +22,13 @@ return [
 
     'middleware' => [
         'api' => [
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            Cors::class,
+            EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SubstituteBindings::class,
             
         ],
-        
+       
     ],
 
     /*

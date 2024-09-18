@@ -58,7 +58,9 @@ public function login(Request $request)
             $token = $user->createToken('Personal Access Token')->plainTextToken;
             Log::info('Token created:', ['token' => $token]);
 
-            return response()->json(['token' => $token, 'role' => $user->role], 200);
+            $role = $user->getRoleNames()->first(); 
+
+            return response()->json(['token' => $token, 'role' => $role], 200);
         } catch (\Exception $e) {
             Log::error('Error creating token:', ['error' => $e->getMessage()]);
             return response()->json(['error' => 'Token creation failed'], 500);
@@ -69,6 +71,7 @@ public function login(Request $request)
 
     return response()->json(['error' => 'Unauthorized'], 401);
 }
+
 
 
 
